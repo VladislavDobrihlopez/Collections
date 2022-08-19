@@ -11,7 +11,7 @@ public class CarCollectionTest {
 
     @Before
     public void setUp() throws Exception {
-        carCollection = new CarHashSet();
+        carCollection = new CarMyList();
 
         for (int i = 0; i < INITIAL_CAPACITY; i++) {
             carCollection.add(new Car("brand " + i, i));
@@ -47,5 +47,16 @@ public class CarCollectionTest {
     public void mustReturnFalseForNonExistentElement() {
         Car car = new Car("someNonExistentCar", 7);
         assertFalse(carCollection.contains(car));
+    }
+
+    @Test
+    public void forEachWorksCorrectly() {
+        int counter = 0;
+
+        for (Car car : carCollection) {
+            counter++;
+        }
+
+        assertEquals(counter, carCollection.size());
     }
 }

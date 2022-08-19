@@ -1,5 +1,7 @@
 package Collections;
 
+import java.util.Iterator;
+
 public class CarLinkedList implements CarList {
     private static final int ELEMENT_NOT_FOUND = -1;
     private Node first;
@@ -84,6 +86,25 @@ public class CarLinkedList implements CarList {
         size--;
 
         return true;
+    }
+
+    @Override
+    public Iterator<Car> iterator() {
+        return new Iterator<Car>() {
+            private Node current = first;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public Car next() {
+                Car car = current.value;
+                current = current.next;
+                return car;
+            }
+        };
     }
 
     @Override
