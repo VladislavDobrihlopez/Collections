@@ -1,6 +1,7 @@
 package Collections;
 
 public class CarLinkedList implements CarList {
+    private static final int ELEMENT_NOT_FOUND = -1;
     private Node first;
     private Node last;
     private int size = 0;
@@ -11,7 +12,7 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
-    public void add(Car car) {
+    public boolean add(Car car) {
         if (first == null) {
             Node node = new Node(null, null, car);
             first = node;
@@ -22,17 +23,17 @@ public class CarLinkedList implements CarList {
             beforeLast.next = last;
         }
         size++;
+        return true;
     }
 
     @Override
-    public void add(Car car, int index) {
+    public boolean add(Car car, int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
 
         if (index == size) {
-            add(car);
-            return;
+            return add(car);
         }
 
         Node supposedToBeNext = getNoteById(index);
@@ -48,18 +49,15 @@ public class CarLinkedList implements CarList {
 
         supposedToBeNext.previous = node;
         size++;
+        return true;
     }
 
     @Override
     public boolean remove(Car car) {
-        Node node = first;
+        int index = getElementIndex(car);
 
-        for (int i = 0; i < size; i++) {
-            if (node.value.equals(car)) {
-                return removeAt(i);
-            }
-
-            node = node.next;
+        if (index != ELEMENT_NOT_FOUND) {
+            return removeAt(index);
         }
 
         return false;
@@ -89,6 +87,11 @@ public class CarLinkedList implements CarList {
     }
 
     @Override
+    public boolean contains(Car car) {
+        return getElementIndex(car) != ELEMENT_NOT_FOUND;
+    }
+
+    @Override
     public int size() {
         return size;
     }
@@ -110,6 +113,18 @@ public class CarLinkedList implements CarList {
         }
 
         return current;
+    }
+
+    private int getElementIndex(Car car) {
+        Node current = first;
+
+        for (int i = 0; i < size; i++) {
+            if (current.value.equals(car)) {
+                return i;
+            }
+            current = current.next;
+        }
+        return ELEMENT_NOT_FOUND;
     }
 
     private void checkIfIndexValid(int index) {

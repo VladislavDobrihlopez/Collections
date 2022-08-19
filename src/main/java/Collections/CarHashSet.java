@@ -99,6 +99,21 @@ public class CarHashSet implements CarSet {
         return true;
     }
 
+    @Override
+    public boolean contains(Car car) {
+        int position = getElementPosition(entries.length, car);
+        Entry existentElement = entries[position];
+
+        while (existentElement != null) {
+            if (existentElement.value.equals(car)) {
+                return true;
+            }
+            existentElement = existentElement.next;
+        }
+
+        return false;
+    }
+
     private int getElementPosition(int hashTableCapacity, Car element) {
         return Math.abs(element.hashCode()) % hashTableCapacity;
     }

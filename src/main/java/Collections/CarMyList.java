@@ -15,15 +15,16 @@ public class CarMyList implements CarList {
     }
 
     @Override
-    public void add(Car car) {
+    public boolean add(Car car) {
         tryToIncreaseCapacity();
 
         cars[size] = car;
         size++;
+        return true;
     }
 
     @Override
-    public void add(Car car, int index) {
+    public boolean add(Car car, int index) {
         tryToIncreaseCapacity();
 
         if (index < 0 || index > size) {
@@ -37,6 +38,7 @@ public class CarMyList implements CarList {
 
         cars[index] = car;
         size++;
+        return true;
     }
 
     @Override
@@ -62,6 +64,17 @@ public class CarMyList implements CarList {
         size--;
 
         return true;
+    }
+
+    @Override
+    public boolean contains(Car car) {
+        for (int i = 0; i < size; i++) {
+            if (cars[i].equals(car)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
