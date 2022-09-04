@@ -1,11 +1,20 @@
 package Collections;
 
-public interface CarList {
+public interface CarList extends CarCollection {
     public Car get(int index);
-    public void add(Car car);
-    public void add(Car car, int index);
+
+    public boolean add(Car car);
+
+    public boolean add(Car car, int index);
+
     public boolean remove(Car car);
+
     public boolean removeAt(int index);
+
+    public boolean contains(Car car);
+
+
     public int size();
+
     public void clear();
 }

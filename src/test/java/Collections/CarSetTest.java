@@ -14,7 +14,7 @@ public class CarSetTest {
         carSet = new CarHashSet();
 
         for (int i = 0; i < INITIAL_NUMBER_OF_ITEMS; i++) {
-            carSet.add(new Car("brand" + i, i));
+            carSet.add(new Car("brand " + i, i));
         }
     }
 
@@ -28,7 +28,7 @@ public class CarSetTest {
 
     @Test
     public void whenElementRemovedByInstanceThenSizeMustBeDecreased() {
-        Car car = new Car("brand50", 50);
+        Car car = new Car("brand 50", 50);
         assertTrue(carSet.remove(car));
         assertEquals(INITIAL_NUMBER_OF_ITEMS - 1, carSet.size());
     }
