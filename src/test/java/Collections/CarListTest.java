@@ -11,7 +11,7 @@ public class CarListTest {
 
     @Before
     public void setUp() throws Exception {
-        carList = new CarLinkedList();
+        carList = new CarMyList();
 
         for (int i = 0; i < 100; i++) {
             carList.add(new Car("brand " + i, i));

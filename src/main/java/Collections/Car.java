@@ -31,4 +31,12 @@ public class Car {
     public int hashCode() {
         return Objects.hash(brand, number);
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", number=" + number +
+                '}';
+    }
 }
