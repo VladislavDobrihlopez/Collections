@@ -1,5 +1,8 @@
 package Collections;
 
+import Collections.Entities.Car;
+import Collections.Interfaces.CarSet;
+
 import java.util.Iterator;
 
 public class CarHashSet implements CarSet {

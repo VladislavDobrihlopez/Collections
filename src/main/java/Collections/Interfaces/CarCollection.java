@@ -1,4 +1,6 @@
-package Collections;
+package Collections.Interfaces;
+
+import Collections.Entities.Car;
 
 public interface CarCollection extends Iterable<Car> {
     public boolean add(Car car);

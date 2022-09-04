@@ -1,5 +1,8 @@
 package Collections;
 
+import Collections.Entities.Car;
+import Collections.Interfaces.CarList;
+
 import java.util.Iterator;
 
 public class CarLinkedList implements CarList {

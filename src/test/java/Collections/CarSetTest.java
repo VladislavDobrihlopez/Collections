@@ -1,5 +1,7 @@
 package Collections;
 
+import Collections.Entities.Car;
+import Collections.Interfaces.CarSet;
 import org.junit.Before;
 import org.junit.Test;
 
