@@ -15,7 +15,6 @@ public interface CarList extends CarCollection {
 
     public boolean contains(Car car);
 
-
     public int size();
 
     public void clear();

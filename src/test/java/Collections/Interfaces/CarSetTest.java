@@ -1,5 +1,6 @@
-package Collections;
+package Collections.Interfaces;
 
+import Collections.CarHashSetReal;
 import Collections.Entities.Car;
 import Collections.Interfaces.CarSet;
 import org.junit.Before;
@@ -13,7 +14,7 @@ public class CarSetTest {
 
     @Before
     public void setUp() throws Exception {
-        carSet = new CarHashSet();
+        carSet = new CarHashSetReal();
 
         for (int i = 0; i < INITIAL_NUMBER_OF_ITEMS; i++) {
             carSet.add(new Car("brand " + i, i));

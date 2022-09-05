@@ -2,10 +2,11 @@ package Collections;
 
 import Collections.Entities.Car;
 import Collections.Interfaces.CarList;
+import Collections.Interfaces.CarQueue;
 
 import java.util.Iterator;
 
-public class CarLinkedList implements CarList {
+public class CarLinkedList implements CarList, CarQueue {
     private static final int ELEMENT_NOT_FOUND = -1;
     private Node first;
     private Node last;
@@ -29,6 +30,22 @@ public class CarLinkedList implements CarList {
         }
         size++;
         return true;
+    }
+
+    @Override
+    public Car peek() {
+        return (size > 0) ? get(0) : null;
+    }
+
+    @Override
+    public Car poll() {
+        if (size == 0) {
+            return null;
+        }
+
+        Car car = get(0);
+        removeAt(0);
+        return car;
     }
 
     @Override
