@@ -1,4 +1,6 @@
-package Collections;
+package Collections.Interfaces;
+
+import Collections.Entities.Car;
 
 public interface CarSet extends CarCollection {
     public boolean add(Car car);
@@ -8,7 +10,6 @@ public interface CarSet extends CarCollection {
     public boolean remove(Car car);
 
     public boolean contains(Car car);
-
 
     public void clear();
 }

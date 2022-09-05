@@ -1,5 +1,8 @@
 package Collections;
 
+import Collections.Entities.Car;
+import Collections.Interfaces.CarCollection;
+
 import java.util.*;
 
 public class Main {

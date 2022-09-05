@@ -1,4 +1,6 @@
-package Collections;
+package Collections.Interfaces;
+
+import Collections.Entities.Car;
 
 public interface CarList extends CarCollection {
     public Car get(int index);
