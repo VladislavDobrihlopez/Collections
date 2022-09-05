@@ -3,7 +3,7 @@ package Collections;
 import Collections.Entities.Car;
 import Collections.Interfaces.CarCollection;
 
-import java.util.*;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,6 +13,7 @@ public class Main {
         cars.add(new Car("car3", 3));
 
         Iterator<Car> iterator = cars.iterator();
+
         while (iterator.hasNext()) {
             Car currentCar = iterator.next();
             System.out.println(currentCar);

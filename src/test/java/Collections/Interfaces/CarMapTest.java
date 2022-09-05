@@ -1,5 +1,6 @@
-package Collections;
+package Collections.Interfaces;
 
+import Collections.CarHashMap;
 import Collections.Entities.Car;
 import Collections.Entities.CarOwner;
 import Collections.Interfaces.CarMap;

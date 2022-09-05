@@ -1,5 +1,6 @@
-package Collections;
+package Collections.Interfaces;
 
+import Collections.CarMyList;
 import Collections.Entities.Car;
 import Collections.Interfaces.CarList;
 import org.junit.Before;

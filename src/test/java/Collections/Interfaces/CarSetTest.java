@@ -1,5 +1,6 @@
-package Collections;
+package Collections.Interfaces;
 
+import Collections.CarHashSetReal;
 import Collections.Entities.Car;
 import Collections.Interfaces.CarSet;
 import org.junit.Before;
