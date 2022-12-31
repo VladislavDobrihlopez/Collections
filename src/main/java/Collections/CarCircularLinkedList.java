@@ -5,17 +5,11 @@ import Collections.Interfaces.CarList;
 
 import java.util.Iterator;
 
-public class CarCircularLinkedList implements CarList {
+public class CarCircularLinkedList implements Iterable<Car> {
     private Node head = null;
     private Node tail = null;
     private int size = 0;
 
-    @Override
-    public Car get(int index) {
-        return null;
-    }
-
-    @Override
     public boolean add(Car car) {
         Node newNode = new Node(car);
 
@@ -27,15 +21,10 @@ public class CarCircularLinkedList implements CarList {
         tail = newNode;
         tail.next = head;
         size++;
+
         return true;
     }
 
-    @Override
-    public boolean add(Car car, int index) {
-        return false;
-    }
-
-    @Override
     public boolean remove(Car car) {
         Node last = head;
         Node secondLast = null;
@@ -45,7 +34,9 @@ public class CarCircularLinkedList implements CarList {
                 if (tail == head) {
                     tail = head = null;
                 } else {
-                    secondLast.next = last.next;
+                    if (secondLast != null) {
+                        secondLast.next = last.next;
+                    }
 
                     if (head == last) {
                         head = head.next;
@@ -64,12 +55,6 @@ public class CarCircularLinkedList implements CarList {
         return false;
     }
 
-    @Override
-    public boolean removeAt(int index) {
-        return false;
-    }
-
-    @Override
     public boolean contains(Car car) {
         Node current = head;
 
@@ -82,18 +67,15 @@ public class CarCircularLinkedList implements CarList {
         return false;
     }
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     public void clear() {
         head = tail = null;
         size = 0;
     }
 
-    @Override
     public Iterator<Car> iterator() {
         return new Iterator<Car>() {
             private Node node = head;
