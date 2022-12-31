@@ -1,6 +1,6 @@
 package Collections.Interfaces;
 
-import Collections.CarLinkedList;
+import Collections.MyLinkedList;
 import Collections.Entities.Car;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +10,11 @@ import static org.junit.Assert.assertNull;
 
 public class CarQueueTest {
     private static final int INITIAL_NUMBER_OF_ITEMS = 100;
-    private CarQueue queue;
+    private CarQueue<Car> queue;
 
     @Before
     public void setUp() {
-        queue = new CarLinkedList();
+        queue = new MyLinkedList<>();
         for (int i = 0; i < INITIAL_NUMBER_OF_ITEMS; i++) {
             queue.add(new Car("Brand" + i, i));
         }

@@ -1,31 +1,30 @@
 package Collections;
 
-import Collections.Entities.Car;
 import Collections.Interfaces.CarList;
 import Collections.Interfaces.CarQueue;
 
 import java.util.Iterator;
 
-public class CarLinkedList implements CarList, CarQueue {
+public class MyLinkedList<T> implements CarList<T>, CarQueue<T> {
     private static final int ELEMENT_NOT_FOUND = -1;
-    private Node first;
-    private Node last;
+    private Node<T> first;
+    private Node<T> last;
     private int size = 0;
 
     @Override
-    public Car get(int index) {
+    public T get(int index) {
         return getNoteById(index).value;
     }
 
     @Override
-    public boolean add(Car car) {
+    public boolean add(T item) {
         if (first == null) {
-            Node node = new Node(null, null, car);
+            Node<T> node = new Node<T>(null, null, item);
             first = node;
             last = node;
         } else {
-            Node beforeLast = last;
-            last = new Node(beforeLast, null, car);
+            Node<T> beforeLast = last;
+            last = new Node<T>(beforeLast, null, item);
             beforeLast.next = last;
         }
         size++;
@@ -33,35 +32,35 @@ public class CarLinkedList implements CarList, CarQueue {
     }
 
     @Override
-    public Car peek() {
+    public T peek() {
         return (size > 0) ? get(0) : null;
     }
 
     @Override
-    public Car poll() {
+    public T poll() {
         if (size == 0) {
             return null;
         }
 
-        Car car = get(0);
+        T item = get(0);
         removeAt(0);
-        return car;
+        return item;
     }
 
     @Override
-    public boolean add(Car car, int index) {
+    public boolean add(T item, int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
 
         if (index == size) {
-            return add(car);
+            return add(item);
         }
 
-        Node supposedToBeNext = getNoteById(index);
-        Node supposedToBePrevious = supposedToBeNext.previous;
+        Node<T> supposedToBeNext = getNoteById(index);
+        Node<T> supposedToBePrevious = supposedToBeNext.previous;
 
-        Node node = new Node(supposedToBePrevious, supposedToBeNext, car);
+        Node<T> node = new Node<T>(supposedToBePrevious, supposedToBeNext, item);
 
         if (supposedToBePrevious != null) {
             supposedToBePrevious.next = node;
@@ -75,8 +74,8 @@ public class CarLinkedList implements CarList, CarQueue {
     }
 
     @Override
-    public boolean remove(Car car) {
-        int index = getElementIndex(car);
+    public boolean remove(T item) {
+        int index = getElementIndex(item);
 
         if (index != ELEMENT_NOT_FOUND) {
             return removeAt(index);
@@ -87,9 +86,9 @@ public class CarLinkedList implements CarList, CarQueue {
 
     @Override
     public boolean removeAt(int index) {
-        Node node = getNoteById(index);
-        Node previous = node.previous;
-        Node next = node.next;
+        Node<T> node = getNoteById(index);
+        Node<T> previous = node.previous;
+        Node<T> next = node.next;
 
         if (previous != null) {
             previous.next = next;
@@ -109,9 +108,9 @@ public class CarLinkedList implements CarList, CarQueue {
     }
 
     @Override
-    public Iterator<Car> iterator() {
-        return new Iterator<Car>() {
-            private Node current = first;
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private Node<T> current = first;
 
             @Override
             public boolean hasNext() {
@@ -119,17 +118,17 @@ public class CarLinkedList implements CarList, CarQueue {
             }
 
             @Override
-            public Car next() {
-                Car car = current.value;
+            public T next() {
+                T item = current.value;
                 current = current.next;
-                return car;
+                return item;
             }
         };
     }
 
     @Override
-    public boolean contains(Car car) {
-        return getElementIndex(car) != ELEMENT_NOT_FOUND;
+    public boolean contains(T item) {
+        return getElementIndex(item) != ELEMENT_NOT_FOUND;
     }
 
     @Override
@@ -144,10 +143,10 @@ public class CarLinkedList implements CarList, CarQueue {
         size = 0;
     }
 
-    private Node getNoteById(int index) {
+    private Node<T> getNoteById(int index) {
         checkIfIndexValid(index);
 
-        Node current = first;
+        Node<T> current = first;
 
         for (int i = 0; i < index; i++) {
             current = current.next;
@@ -156,11 +155,11 @@ public class CarLinkedList implements CarList, CarQueue {
         return current;
     }
 
-    private int getElementIndex(Car car) {
-        Node current = first;
+    private int getElementIndex(T item) {
+        Node<T> current = first;
 
         for (int i = 0; i < size; i++) {
-            if (current.value.equals(car)) {
+            if (current.value.equals(item)) {
                 return i;
             }
             current = current.next;
@@ -174,12 +173,12 @@ public class CarLinkedList implements CarList, CarQueue {
         }
     }
 
-    private static class Node {
-        private Node previous;
-        private Node next;
-        private Car value;
+    private static class Node<T> {
+        private Node<T> previous;
+        private Node<T> next;
+        private T value;
 
-        public Node(Node previous, Node next, Car value) {
+        public Node(Node<T> previous, Node<T> next, T value) {
             this.previous = previous;
             this.next = next;
             this.value = value;

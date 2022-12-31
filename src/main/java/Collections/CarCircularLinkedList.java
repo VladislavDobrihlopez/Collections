@@ -1,17 +1,14 @@
 package Collections;
 
-import Collections.Entities.Car;
-import Collections.Interfaces.CarList;
-
 import java.util.Iterator;
 
-public class CarCircularLinkedList implements Iterable<Car> {
+public class CarCircularLinkedList<T> implements Iterable<T> {
     private Node head = null;
     private Node tail = null;
     private int size = 0;
 
-    public boolean add(Car car) {
-        Node newNode = new Node(car);
+    public boolean add(T item) {
+        Node newNode = new Node(item);
 
         if (head == null) {
             head = newNode;
@@ -25,12 +22,12 @@ public class CarCircularLinkedList implements Iterable<Car> {
         return true;
     }
 
-    public boolean remove(Car car) {
+    public boolean remove(T item) {
         Node last = head;
         Node secondLast = null;
 
         do {
-            if (last.value.equals(car)) {
+            if (last.value.equals(item)) {
                 if (tail == head) {
                     tail = head = null;
                 } else {
@@ -55,11 +52,11 @@ public class CarCircularLinkedList implements Iterable<Car> {
         return false;
     }
 
-    public boolean contains(Car car) {
+    public boolean contains(T item) {
         Node current = head;
 
         do {
-            if (current.value.equals(car)) {
+            if (current.value.equals(item)) {
                 return true;
             }
             current = current.next;
@@ -76,8 +73,8 @@ public class CarCircularLinkedList implements Iterable<Car> {
         size = 0;
     }
 
-    public Iterator<Car> iterator() {
-        return new Iterator<Car>() {
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
             private Node node = head;
             private boolean isHeadVisited = false;
             @Override
@@ -93,18 +90,18 @@ public class CarCircularLinkedList implements Iterable<Car> {
             }
 
             @Override
-            public Car next() {
+            public T next() {
                 node = node.next;
                 return node.value;
             }
         };
     }
 
-    private static class Node {
-        private final Car value;
+    private class Node {
+        private final T value;
         private Node next;
 
-        public Node(Car value) {
+        public Node(T value) {
             this.value = value;
         }
     }

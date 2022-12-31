@@ -1,19 +1,17 @@
 package Collections.Interfaces;
 
-import Collections.Entities.Car;
+public interface CarList<T> extends CarCollection<T> {
+    public T get(int index);
 
-public interface CarList extends CarCollection {
-    public Car get(int index);
+    public boolean add(T item);
 
-    public boolean add(Car car);
+    public boolean add(T item, int index);
 
-    public boolean add(Car car, int index);
-
-    public boolean remove(Car car);
+    public boolean remove(T item);
 
     public boolean removeAt(int index);
 
-    public boolean contains(Car car);
+    public boolean contains(T item);
 
     public int size();
 

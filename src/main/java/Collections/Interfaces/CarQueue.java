@@ -1,11 +1,9 @@
 package Collections.Interfaces;
 
-import Collections.Entities.Car;
+public interface CarQueue<T> extends CarCollection<T> {
+    public boolean add(T item);
 
-public interface CarQueue extends CarCollection {
-    public boolean add(Car car);
+    public T peek();
 
-    public Car peek();
-
-    public Car poll();
+    public T poll();
 }

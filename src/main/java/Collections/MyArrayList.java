@@ -1,54 +1,53 @@
 package Collections;
 
-import Collections.Entities.Car;
 import Collections.Interfaces.CarList;
 
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class CarMyList implements CarList {
+public class MyArrayList<T> implements CarList<T> {
     private static final int INITIAL_CAPACITY = 10;
-    private Car[] cars = new Car[INITIAL_CAPACITY];
+    private Object[] items = new Object[INITIAL_CAPACITY];
     private int size = 0;
 
     @Override
-    public Car get(int index) {
+    public T get(int index) {
         checkIfIndexValid(index);
 
-        return cars[index];
+        return (T) items[index];
     }
 
     @Override
-    public boolean add(Car car) {
+    public boolean add(T item) {
         tryToIncreaseCapacity();
 
-        cars[size] = car;
+        items[size] = item;
         size++;
         return true;
     }
 
     @Override
-    public boolean add(Car car, int index) {
+    public boolean add(T item, int index) {
         tryToIncreaseCapacity();
 
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
 
-        System.arraycopy(cars, index, cars, index + 1, size - index);
+        System.arraycopy(items, index, items, index + 1, size - index);
 //        for (int i = size; i > index; i--) {
-//            cars[i] = cars[i - 1];
+//            items[i] = items[i - 1];
 //        }
 
-        cars[index] = car;
+        items[index] = item;
         size++;
         return true;
     }
 
     @Override
-    public boolean remove(Car car) {
+    public boolean remove(T item) {
         for (int i = 0; i < size; i++) {
-            if (cars[i].equals(car)) {
+            if (items[i].equals(item)) {
                 return removeAt(i);
             }
         }
@@ -60,9 +59,9 @@ public class CarMyList implements CarList {
     public boolean removeAt(int index) {
         checkIfIndexValid(index);
 
-        System.arraycopy(cars, index + 1, cars, index, size - index - 1);
+        System.arraycopy(items, index + 1, items, index, size - index - 1);
 //        for (int i = index; i < size - 1; i++) {
-//            cars[i] = cars[i + 1];
+//            items[i] = items[i + 1];
 //        }
 
         size--;
@@ -71,9 +70,9 @@ public class CarMyList implements CarList {
     }
 
     @Override
-    public boolean contains(Car car) {
+    public boolean contains(T item) {
         for (int i = 0; i < size; i++) {
-            if (cars[i].equals(car)) {
+            if (items[i].equals(item)) {
                 return true;
             }
         }
@@ -88,7 +87,7 @@ public class CarMyList implements CarList {
 
     @Override
     public void clear() {
-        cars = new Car[INITIAL_CAPACITY];
+        items = new Object[INITIAL_CAPACITY];
         size = 0;
     }
 
@@ -99,14 +98,14 @@ public class CarMyList implements CarList {
     }
 
     private void tryToIncreaseCapacity() {
-        if (size == cars.length) {
-            cars = Arrays.copyOf(cars, cars.length * 2);
+        if (size == items.length) {
+            items = Arrays.copyOf(items, items.length * 2);
         }
     }
 
     @Override
-    public Iterator<Car> iterator() {
-        return new Iterator<Car>() {
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
             int index = 0;
 
             @Override
@@ -115,8 +114,8 @@ public class CarMyList implements CarList {
             }
 
             @Override
-            public Car next() {
-                return cars[index++];
+            public T next() {
+                return (T) items[index++];
             }
         };
     }

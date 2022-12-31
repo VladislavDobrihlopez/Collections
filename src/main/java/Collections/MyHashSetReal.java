@@ -1,22 +1,21 @@
 package Collections;
 
-import Collections.Entities.Car;
 import Collections.Interfaces.CarSet;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CarHashSetReal implements CarSet {
-    private final Map<Car, Object> hashMap = new HashMap<>();
+public class MyHashSetReal<K> implements CarSet<K> {
+    private final Map<K, Object> hashMap = new HashMap<>();
     private final Object any = new Object();
 
     @Override
-    public boolean add(Car car) {
-        if (hashMap.containsKey(car)) {
+    public boolean add(K item) {
+        if (hashMap.containsKey(item)) {
             return false;
         }
-        hashMap.put(car, any);
+        hashMap.put(item, any);
         return true;
     }
 
@@ -26,8 +25,8 @@ public class CarHashSetReal implements CarSet {
     }
 
     @Override
-    public boolean remove(Car car) {
-        return hashMap.remove(car) != null;
+    public boolean remove(K item) {
+        return hashMap.remove(item) != null;
     }
 
     @Override
@@ -36,12 +35,12 @@ public class CarHashSetReal implements CarSet {
     }
 
     @Override
-    public boolean contains(Car car) {
-        return hashMap.containsKey(car);
+    public boolean contains(K item) {
+        return hashMap.containsKey(item);
     }
 
     @Override
-    public Iterator<Car> iterator() {
+    public Iterator<K> iterator() {
         return hashMap.keySet().iterator();
     }
 }
