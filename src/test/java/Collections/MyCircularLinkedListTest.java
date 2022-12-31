@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CarCircularLinkedListTest {
+public class MyCircularLinkedListTest {
 
     private static final int INITIAL_CAPACITY = 100;
-    private CarCircularLinkedList<Car> circularLinkedList;
+    private MyCircularLinkedList<Car> circularLinkedList;
 
     @Before
     public void setUp() throws Exception {
-        circularLinkedList = new CarCircularLinkedList<>();
+        circularLinkedList = new MyCircularLinkedList<>();
 
         for (int i = 0; i < INITIAL_CAPACITY; i++) {
             circularLinkedList.add(new Car("nissan", i));

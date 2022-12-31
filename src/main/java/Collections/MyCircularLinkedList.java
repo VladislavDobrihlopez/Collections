@@ -2,7 +2,7 @@ package Collections;
 
 import java.util.Iterator;
 
-public class CarCircularLinkedList<T> implements Iterable<T> {
+public class MyCircularLinkedList<T> implements Iterable<T> {
     private Node head = null;
     private Node tail = null;
     private int size = 0;
