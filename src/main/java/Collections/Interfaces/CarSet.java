@@ -1,15 +1,13 @@
 package Collections.Interfaces;
 
-import Collections.Entities.Car;
-
-public interface CarSet extends CarCollection {
-    public boolean add(Car car);
+public interface CarSet<T> extends CarCollection<T> {
+    public boolean add(T item);
 
     public int size();
 
-    public boolean remove(Car car);
+    public boolean remove(T item);
 
-    public boolean contains(Car car);
+    public boolean contains(T item);
 
     public void clear();
 }

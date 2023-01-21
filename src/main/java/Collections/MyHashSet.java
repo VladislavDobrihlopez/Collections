@@ -1,23 +1,22 @@
 package Collections;
 
-import Collections.Entities.Car;
 import Collections.Interfaces.CarSet;
 
 import java.util.Iterator;
 
-public class CarHashSet implements CarSet {
+public class MyHashSet<T> implements CarSet<T> {
     private static final int INITIAL_CAPACITY = 16;
     private static final double LOAD_FACTOR = 0.75;
-    private Entry[] entries = new Entry[INITIAL_CAPACITY];
+    private Object[] entries = new Object[INITIAL_CAPACITY];
     private int size = 0;
 
     @Override
-    public boolean add(Car car) {
+    public boolean add(T item) {
         if (size >= entries.length * LOAD_FACTOR) {
             shuffleArray();
         }
 
-        boolean isAdded = add(car, entries);
+        boolean isAdded = add(item, entries);
         if (isAdded) {
             size++;
         }
@@ -30,23 +29,23 @@ public class CarHashSet implements CarSet {
     }
 
     @Override
-    public boolean remove(Car car) {
-        int position = getElementPosition(entries.length, car);
+    public boolean remove(T item) {
+        int position = getElementPosition(entries.length, item);
         if (entries[position] == null) {
             return false;
         }
 
-        Entry secondLast = entries[position];
+        Entry secondLast = (Entry) entries[position];
         Entry last = secondLast.next;
 
         while (last != null) {
-            if (secondLast.value.equals(car)) {
+            if (secondLast.value.equals(item)) {
                 entries[position] = last;
                 size--;
                 return true;
             }
 
-            if (last.value.equals(car)) {
+            if (last.value.equals(item)) {
                 secondLast.next = last.next;
                 size--;
                 return true;
@@ -61,17 +60,17 @@ public class CarHashSet implements CarSet {
 
     @Override
     public void clear() {
-        entries = new Entry[INITIAL_CAPACITY];
+        entries = new Object[INITIAL_CAPACITY];
         size = 0;
     }
 
     private void shuffleArray() {
-        Entry[] doubledEntries = new Entry[entries.length * 2];
-        for (Entry entry : entries) {
-            Entry element = entry;
+        Object[] doubledEntries = new Object[entries.length * 2];
+        for (Object entry : entries) {
+            Entry element = (Entry) entry;
             while (element != null) {
-                Car car = element.value;
-                add(car, doubledEntries);
+                T item = element.value;
+                add(item, doubledEntries);
                 element = element.next;
             }
         }
@@ -79,22 +78,22 @@ public class CarHashSet implements CarSet {
         entries = doubledEntries;
     }
 
-    private boolean add(Car car, Entry[] destination) {
-        int position = getElementPosition(destination.length, car);
+    private boolean add(T item, Object[] destination) {
+        int position = getElementPosition(destination.length, item);
 
-        Entry entry = new Entry(car, null);
+        Entry entry = new Entry(item, null);
 
         if (destination[position] == null) {
             destination[position] = entry;
         } else {
-            Entry existentElement = destination[position];
+            Entry existentElement = (Entry) destination[position];
 
-            if (existentElement.value.equals(car)) {
+            if (existentElement.value.equals(item)) {
                 return false;
             }
 
             while (existentElement.next != null) {
-                if (existentElement.value.equals(car)) {
+                if (existentElement.value.equals(item)) {
                     return false;
                 }
                 existentElement = existentElement.next;
@@ -105,12 +104,12 @@ public class CarHashSet implements CarSet {
     }
 
     @Override
-    public boolean contains(Car car) {
-        int position = getElementPosition(entries.length, car);
-        Entry existentElement = entries[position];
+    public boolean contains(T item) {
+        int position = getElementPosition(entries.length, item);
+        Entry existentElement = (Entry) entries[position];
 
         while (existentElement != null) {
-            if (existentElement.value.equals(car)) {
+            if (existentElement.value.equals(item)) {
                 return true;
             }
             existentElement = existentElement.next;
@@ -119,13 +118,13 @@ public class CarHashSet implements CarSet {
         return false;
     }
 
-    private int getElementPosition(int hashTableCapacity, Car element) {
+    private int getElementPosition(int hashTableCapacity, T element) {
         return Math.abs(element.hashCode()) % hashTableCapacity;
     }
 
     @Override
-    public Iterator<Car> iterator() {
-        return new Iterator<Car>() {
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
             private int alreadyListed = 0;
             private int position = 0;
             private Entry current = null;
@@ -136,7 +135,7 @@ public class CarHashSet implements CarSet {
             }
 
             @Override
-            public Car next() {
+            public T next() {
                 for (int i = position; i < entries.length; i++) {
                     if (entries[i] != null) {
                         position = i;
@@ -145,12 +144,12 @@ public class CarHashSet implements CarSet {
                 }
 
                 if (current == null) {
-                    current = entries[position];
+                    current = (Entry) entries[position];
                     alreadyListed++;
                     return current.value;
                 }
 
-                Car value = current.value;
+                T value = current.value;
                 current = current.next;
 
                 if (current == null) {
@@ -164,11 +163,11 @@ public class CarHashSet implements CarSet {
         };
     }
 
-    private static class Entry {
-        private Car value;
+    private class Entry {
+        private T value;
         private Entry next;
 
-        public Entry(Car value, Entry next) {
+        public Entry(T value, Entry next) {
             this.value = value;
             this.next = next;
         }

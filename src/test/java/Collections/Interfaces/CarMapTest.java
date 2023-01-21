@@ -1,9 +1,8 @@
 package Collections.Interfaces;
 
-import Collections.CarHashMap;
+import Collections.MyHashMap;
 import Collections.Entities.Car;
 import Collections.Entities.CarOwner;
-import Collections.Interfaces.CarMap;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ import static org.junit.Assert.*;
 public class CarMapTest {
     private static final int INITIAL_NUMBER_OF_ITEMS = 100;
 
-    private CarMap carMap = new CarHashMap();
+    private final CarMap<CarOwner, Car> carMap = new MyHashMap<>();
 
     @Before
     public void setUp() throws Exception {

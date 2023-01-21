@@ -1,21 +1,18 @@
 package Collections.Interfaces;
 
-import Collections.Entities.Car;
-import Collections.Entities.CarOwner;
-
 import java.util.List;
 import java.util.Set;
 
-public interface CarMap {
-    public void put(CarOwner carOwner, Car car);
+public interface CarMap<K, V> {
+    public void put(K key, V value);
 
-    public Car get(CarOwner carOwner);
+    public V get(K key);
 
-    public Set<CarOwner> keySet();
+    public Set<K> keySet();
 
-    public List<Car> values();
+    public List<V> values();
 
-    public boolean remove(CarOwner carOwner);
+    public boolean remove(K key);
 
     public int size();
 

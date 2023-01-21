@@ -1,8 +1,7 @@
 package Collections.Interfaces;
 
-import Collections.CarMyList;
+import Collections.MyArrayList;
 import Collections.Entities.Car;
-import Collections.Interfaces.CarList;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,11 +9,11 @@ import static org.junit.Assert.*;
 
 public class CarListTest {
 
-    private CarList carList;
+    private CarList<Car> carList;
 
     @Before
     public void setUp() throws Exception {
-        carList = new CarMyList();
+        carList = new MyArrayList<Car>();
 
         for (int i = 0; i < 100; i++) {
             carList.add(new Car("brand " + i, i));
